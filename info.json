@@ -1,0 +1,9 @@
+{
+	"name": "GeneratorPriority",
+	"version": "0.1.0",
+	"title": "GeneratorPriority",
+	"author": "Kassie",
+	"homepage": "",
+	"description": "Adds hotkeys to adjust power prioriry of generators",
+	"factorio_version": "0.13"
+}
