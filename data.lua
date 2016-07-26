@@ -1,3 +1,5 @@
+require "prototypes.create"
+
 data:extend({
   {
     type = "custom-input",
