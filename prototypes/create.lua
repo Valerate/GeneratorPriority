@@ -1,7 +1,7 @@
 
 function GeneratorCreate(base)
 
-	local Pri = data.raw["generator"][base].energy_source.usage_priority
+	local Pri = base.energy_source.usage_priority
 	
 	if Pri == "primary" then
 		GeneratorCreateSecondary(base)
