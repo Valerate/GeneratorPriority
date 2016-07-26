@@ -7,16 +7,11 @@ end
 
 
 
-script.on_init(function()
-	for i, entity in pairs(data.raw["generator"]) do
-		GeneratorCreate(entity)
-	end
-end)
-
 script.on_event("decrease-generator-priority", function(event)
 	writeDebug( "Decrease")
 	local selection = game.players[event.player_index].selected
-	local force = game.player[event.player_inder].force
+	local force = "player"
+	-- local force = game.players[event.player_inder].force
 	if selection and selection.type == "generator" then
 		DecreasePriority(selection, event, force)
 	end
@@ -25,7 +20,8 @@ end)
 script.on_event("increase-generator-priority", function(event)
 	writeDebug( "Increase")
 	local selection = game.players[event.player_index].selected
-	local force = game.player[event.player_inder].force
+	local force = "player"
+	-- local force = game.players[event.player_inder].force
 	if selection and selection.type == "generator" then
 		IncreasePriority(selection, event, force)
 	end
