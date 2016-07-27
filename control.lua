@@ -8,76 +8,80 @@ end
 
 
 script.on_event("decrease-generator-priority", function(event)
-	writeDebug( "Decrease")
 	local selection = game.players[event.player_index].selected
 	local force = "player"
-	-- local force = game.players[event.player_inder].force
+	local force = game.players[event.player_index].force
 	if selection and selection.type == "generator" then
 		DecreasePriority(selection, event, force)
 	end
 end)
 
 script.on_event("increase-generator-priority", function(event)
-	writeDebug( "Increase")
 	local selection = game.players[event.player_index].selected
 	local force = "player"
-	-- local force = game.players[event.player_inder].force
+	local force = game.players[event.player_index].force
 	if selection and selection.type == "generator" then
 		IncreasePriority(selection, event, force)
 	end
 end)
 
-function IncreasePriority(entity, event, force)
-	writeDebug("before")
-	local Pri = {"nothing"}
+function DecreasePriority(entity, event, force)
 	local Pos = entity.position
 	local Name = entity.name
-	local Pri = data.raw["generator"][Name].energy_source.usage_priority
 	local Rot = entity.direction
-	writeDebug("after")
 	
-	if Pri == "primary" then 
-		print("The generator is now secondary")
-		entity.destoy()
-		surface.create_entity({name = "GP-".. Name .. "-Secondary", postition = Pos, direction = Rot, force = force})
-
-	elseif Pri == "secondary" then
-	
-		print("The generator is now terciary")
-		entity.destoy()
-		surface.create_entity({name = "GP-".. Name .. "-Terciaty", postition = Pos, direction = Rot, force = force})
+	if string.find(Name, "-Primary") then 
+		local Name = string.gsub(Name, "GP%-", "")
+		local Name = string.gsub(Name, "-Primary", "")
+		writeDebug("The generator is now secondary")
+		entity.destroy()
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Secondary", position = Pos, direction = Rot, force = force})
+			
 		
-	elseif Pri == "terciary" then
-		print("The generator is already terciary")
+	elseif string.find(Name, "-Secondary") then
+		local Name = string.gsub(Name, "GP%-", "")
+		local Name = string.gsub(Name, "-Secondary", "")
+		writeDebug("The generator is now terciary")
+		entity.destroy()
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Terciary", position = Pos, direction = Rot,force = force})
+			
+	elseif string.find(Name, "Terciary") then
+		writeDebug("The generator is already terciary")
 		
-	-- else
-		-- print("You Done fuck'd")
+	else
+		writeDebug("The generator is now terciary")
+		entity.destroy()
+		
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Terciary", position = Pos, direction = Rot, force = force})
+			
 	end
 end
 
-function DecreasePriority(entity, event)
-	writeDebug("before")
-	local Pri = {}
+function IncreasePriority(entity, event, force)
 	local Pos = entity.position
 	local Name = entity.name
-	local Pri = data.raw["generator"][Name].energy_source.usage_priority
 	local Rot = entity.direction
-	writeDebug("after")
-	
-	if Pri == "primary" then 
-		print("The generator is already primary")
-	elseif Pri == "secondary" then
-		print("The generator is now primary")
-		entity.destoy()
-		surface.create_entity({name = "GP-".. Name .. "-Primary", postition = Pos, direction = Rot, force = force})
+	if string.find(Name, "-Primary") then 
+		writeDebug("The generator is already primary")
+	elseif string.find(Name, "-Secondary") then
+		local Name = string.gsub(Name, "GP%-", "")
+		local Name = string.gsub(Name, "-Secondary", "")
+		writeDebug("The generator is now primary")
+		entity.destroy()
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Primary", position = Pos, direction = Rot, force = force})
 		
-	elseif Pri == "terciary" then
-		print("The generator is now secondary")
-		entity.destoy()
-		surface.create_entity({name = "GP-".. Name .. "-Secondary", postition = Pos, direction = Rot, force = force})
-		
-	-- else
-		-- print("You Done fuck'd")
+	elseif string.find(Name, "-Terciary") then
+		local Name = string.gsub(Name, "GP%-", "")
+		local Name = string.gsub(Name, "-Terciary", "")
+		writeDebug("The generator is now secondary")
+		entity.destroy()
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Secondary", position = Pos, direction = Rot, force = force})
+
+	else
+		writeDebug("The generator is now primary")
+		entity.destroy()
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Primary", position = Pos, direction = Rot, force = force})
+
 	end
 
 end
