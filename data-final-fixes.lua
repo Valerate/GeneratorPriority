@@ -4,7 +4,8 @@ data:extend({
     type = "item-group",
     name = "GP-Hidden",
     order = "o",
-	icon = "__base__/graphics/item-group/logistics.png"
+	icon = "__base__/graphics/item-group/logistics.png",
+	icon_size = 64
   },
   {
     type = "item-subgroup",

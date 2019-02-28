@@ -8,7 +8,7 @@ function GeneratorCreate(base)
 	elseif Pri == "secondary" then
 		GeneratorCreatePrimary(base)
 		GeneratorCreateTerciary(base)
-	elseif Pri == "terciary" then
+	elseif Pri == "tertiary" then
 		GeneratorCreatePrimary(base)
 		GeneratorCreateSecondary(base)
 	else
@@ -26,7 +26,7 @@ function GeneratorCreatePrimary(base)
 	
 	obj.name = "GP-".. NAME.. "-Primary"
 	obj.energy_source.usage_priority = "primary-output"
-	obj.localized_name = {"entity-name." .. obj.name, NAME .. " Primary Output"}
+	obj.localised_name =  {"", {"entity-name." .. NAME}, " [Primary]"}
 	data.raw["generator"][obj.name] = obj
 end
 
@@ -38,7 +38,7 @@ function GeneratorCreateSecondary(base)
 	
 	obj.name = "GP-".. NAME.. "-Secondary"
 	obj.energy_source.usage_priority = "secondary-output"
-	obj.localized_name = {"entity-name." .. obj.name, NAME .. " Secondary Output"}
+	obj.localised_name =  {"", {"entity-name." .. NAME}, " [Secondary]"}
 	data.raw["generator"][obj.name] = obj
 end
 
@@ -46,11 +46,11 @@ function GeneratorCreateTerciary(base)
 	local obj = util.table.deepcopy(base)
 	local NAME = base.name
 	
-	GeneratorCreateItem(data.raw["item"][NAME],"Terciary")
+	GeneratorCreateItem(data.raw["item"][NAME],"Tertiary")
 	
-	obj.name = "GP-".. NAME.. "-Terciary"
-	obj.energy_source.usage_priority = "terciary"
-	obj.localized_name = { "entity-name." .. obj.name, NAME .. " Terciary Output"}
+	obj.name = "GP-".. NAME.. "-Tertiary"
+	obj.energy_source.usage_priority = "tertiary"
+	obj.localised_name = {"", {"entity-name." .. NAME}, " [Tertiary]"}
 	data.raw["generator"][obj.name] = obj
 end
 

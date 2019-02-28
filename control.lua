@@ -41,18 +41,18 @@ function DecreasePriority(entity, event, force)
 	elseif string.find(Name, "-Secondary") then
 		local Name = string.gsub(Name, "GP%-", "")
 		local Name = string.gsub(Name, "-Secondary", "")
-		writeDebug("The generator is now terciary")
+		writeDebug("The generator is now tertiary")
 		entity.destroy()
-		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Terciary", position = Pos, direction = Rot,force = force})
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Tertiary", position = Pos, direction = Rot,force = force})
 			
-	elseif string.find(Name, "Terciary") then
-		writeDebug("The generator is already terciary")
+	elseif string.find(Name, "Tertiary") then
+		writeDebug("The generator is already tertiary")
 		
 	else
-		writeDebug("The generator is now terciary")
+		writeDebug("The generator is now tertiary")
 		entity.destroy()
 		
-		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Terciary", position = Pos, direction = Rot, force = force})
+		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Tertiary", position = Pos, direction = Rot, force = force})
 			
 	end
 end
@@ -70,9 +70,9 @@ function IncreasePriority(entity, event, force)
 		entity.destroy()
 		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Primary", position = Pos, direction = Rot, force = force})
 		
-	elseif string.find(Name, "-Terciary") then
+	elseif string.find(Name, "-Tertiary") then
 		local Name = string.gsub(Name, "GP%-", "")
-		local Name = string.gsub(Name, "-Terciary", "")
+		local Name = string.gsub(Name, "-Tertiary", "")
 		writeDebug("The generator is now secondary")
 		entity.destroy()
 		game.surfaces.nauvis.create_entity({name = "GP-".. Name .. "-Secondary", position = Pos, direction = Rot, force = force})
