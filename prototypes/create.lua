@@ -27,6 +27,7 @@ function GeneratorCreatePrimary(base)
 	obj.name = "GP-".. NAME.. "-Primary"
 	obj.energy_source.usage_priority = "primary-output"
 	obj.localised_name =  {"", {"entity-name." .. NAME}, " [Primary]"}
+	obj.placeable_by = {item = base.name, count = 1}
 	data.raw["generator"][obj.name] = obj
 end
 
@@ -39,6 +40,7 @@ function GeneratorCreateSecondary(base)
 	obj.name = "GP-".. NAME.. "-Secondary"
 	obj.energy_source.usage_priority = "secondary-output"
 	obj.localised_name =  {"", {"entity-name." .. NAME}, " [Secondary]"}
+	obj.placeable_by = {item = base.name, count = 1}
 	data.raw["generator"][obj.name] = obj
 end
 
@@ -51,6 +53,7 @@ function GeneratorCreateTerciary(base)
 	obj.name = "GP-".. NAME.. "-Tertiary"
 	obj.energy_source.usage_priority = "tertiary"
 	obj.localised_name = {"", {"entity-name." .. NAME}, " [Tertiary]"}
+	obj.placeable_by = {item = base.name, count = 1}
 	data.raw["generator"][obj.name] = obj
 end
 
